@@ -8,23 +8,15 @@
 		$gender = $_POST['gender'];
 		$country = $_POST['country'];
 		
-		//give the csv file a heading
+		
 		$csvfile = "./userdata.csv";
-		$filename = fopen($csvfile, "r+");
-		$form = array("Name", "Email", "Date of Birth", "Gender", "Country");
-		fputcsv($filename,$form);
+		$filename = fopen($csvfile, "a");
+		$formdata = array($name, $email, $newdate, $gender, $country);
+					
+		fputcsv($filename,$formdata);
 		fclose($filename);
 		
-		//store the variables in an array and insert into the csv file
-		$formdata = array($name, $email, $newdate, $gender, $country);
-		$file = fopen($csvfile, "a");				
-		fputcsv($file,$formdata);
-		fclose($file);
+		print_r($formdata);
 		
-		//open the csvfile and print it out as an array
-		$data = fopen($csvfile, "r");
-		$user_data = fread($data, filesize($csvfile));
-		print_r($user_data);
-		fclose($data);
 	}
 ?>
